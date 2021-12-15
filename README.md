@@ -1,13 +1,13 @@
 # Todo-app-React with Redux
 
-***Demo link - TBA***
+***Demo link - https://toodlidoo1.herokuapp.com/***
 
 ## About
 
 The good old todo app.
 
 Built for educational purposes using React.js with hooks.
-For this one added Redux.
+***For this one added Redux.***
 
 <h2>Application Features</h2>
 
