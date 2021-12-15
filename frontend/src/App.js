@@ -1,59 +1,43 @@
 import { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { TodoAdd } from './cmps/TodoAdd'
 import { TodoEdit } from './cmps/TodoEdit'
 import { TodoFilter } from './cmps/TodoFilter'
-import { todoService } from './services/todo.service'
 import { ReactComponent as Edit } from './assets/img/iconmonstr-pencil-14.svg';
 import { ReactComponent as Trashcan } from './assets/img/iconmonstr-trash-can-2.svg';
 import { Footer } from './cmps/Footer'
+import { getTodos, onRemoveTodo, onEditTodo } from './store/actions/todoActions'
+import { onSetPopover, onSetEditPos } from './store/actions/appActions'
 
 
 function App() {
 
-  const [todos, setTodos] = useState([])
-  const [editPos, setEditPos] = useState('')
+  const { todos } = useSelector(state => state.todoModule)
+  const { popover } = useSelector(state => state.appModule)
+  const dispatch = useDispatch()
+
   const [currTodo, setCurrTodo] = useState('')
-  const [popover, setPopover] = useState(false)
   const [editTodoMargin, setEditTodoMargin] = useState(0)
   const todoEl = useRef(null);
 
   useEffect(() => {
-    getTodos()
+    dispatch(getTodos())
   }, [])
-
-  const getTodos = async (filterBy) => {
-    const todos = await todoService.query(filterBy)
-    setTodos(todos)
-  }
 
   const onChangeFilter = async (filterBy) => {
     await getTodos(filterBy)
   };
 
-
   const completeTodo = async (ev, todo) => {
+    ev.stopPropagation()
     todo.complete = !todo.complete
-    await todoService.save(todo)
-    setTodos([...todos]);
+    dispatch(onEditTodo(todo))
   }
-
 
   const removeTodo = async (ev, id) => {
     ev.stopPropagation()
-    const data = await todoService.remove(id)
-    setTodos(todos => todos.filter(todo => todo._id !== data._id))
+    dispatch(onRemoveTodo(id))
     setEditTodoMargin(0)
-  }
-
-  const addTodo = async (todo) => {
-    const newTodo = await todoService.save(todo)
-    setTodos([...todos, newTodo])
-  }
-
-  const editTodo = async (todo, popover) => {
-    await todoService.save(todo)
-    setTodos([...todos])
-    closePopover(popover)
   }
 
   const popoverEdit = async (ev, todo) => {
@@ -61,13 +45,10 @@ function App() {
     setCurrTodo(todo)
     const elPos = await ev.target.getBoundingClientRect()
     checkScrollHeight()
-    setPopover(true)
-    setEditPos(elPos)
+    dispatch(onSetEditPos(elPos))
+    dispatch(onSetPopover(!popover))
   }
 
-  const closePopover = async (popover) => {
-    setPopover(popover)
-  }
 
   const checkScrollHeight = () => {
     if (todoEl.current.scrollHeight > 650) {
@@ -75,8 +56,7 @@ function App() {
     }
   }
 
-
-
+  if (!todos) return <div>Loading...</div>;
   return (
     <div className="app-general">
       <div className="logo">
@@ -84,7 +64,7 @@ function App() {
       </div>
       <div className="title">
         <TodoFilter onChangeFilter={onChangeFilter} />
-        <TodoAdd addTodo={addTodo} />
+        <TodoAdd />
       </div>
       <div className="todos scroller" ref={todoEl} >
         {todos.map(todo => (
@@ -107,11 +87,7 @@ function App() {
       </div>
       {popover &&
         <TodoEdit
-          editTodo={editTodo}
-          closePopover={closePopover}
-          editPos={editPos}
           currTodo={currTodo}
-          popover={popover}
           editTodoMargin={editTodoMargin}
         />}
       <Footer />

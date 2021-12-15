@@ -14,6 +14,7 @@ async function getTodos(req, res) {
     try {
         var queryParams = req.query
         const todo = await todoService.query(queryParams)
+       
         res.json(todo)
     } catch (err) {
         logger.error('Failed to get todos', err)
@@ -47,7 +48,6 @@ async function addTodo(req, res) {
 async function updateTodo(req, res) {
     try {
         const todo = req.body;
-        console.log('todo',todo);
         const updatedTodo = await todoService.update(todo)
         res.send(updatedTodo)
     } catch (err) {

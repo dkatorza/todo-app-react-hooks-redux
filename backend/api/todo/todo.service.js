@@ -2,6 +2,7 @@ const dbService = require('../../services/db.service')
 const logger = require('../../services/logger.service')
 const Todo = require('../../models/Todo')
 const { set } = require('mongoose')
+
 module.exports = {
     remove,
     query,
@@ -19,7 +20,6 @@ async function query(filterBy) {
         const criteria = _buildCriteria(filterBy)
         const sortCriteria = _buildSortCriteria(filterBy)
         const todos = await Todo.find(criteria).sort(sortCriteria)
-        console.log('tt',todos);
         return todos
     } catch (err) {
         logger.error('cannot find todos', err)

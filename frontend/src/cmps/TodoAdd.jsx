@@ -1,11 +1,16 @@
 import { useState} from 'react'
-import { todoService } from '../services/todo.service'
+import { useDispatch } from 'react-redux';
+import{onAddTodo} from '../store/actions/todoActions'
 
-export const TodoAdd = ({addTodo}) => {
+export const TodoAdd = () => {
+
+  const dispatch = useDispatch()
+
   const [newTodo, setNewTodo] = useState('')
   const [placeholder,setPlaceholder] = useState('Doing something?')
 
-  const onAddTodo = async() => {
+
+  const addTodo = async() => {
     if (!newTodo) {
       setPlaceholder(`You must have something to do... `)
       return
@@ -13,7 +18,7 @@ export const TodoAdd = ({addTodo}) => {
     const todo = {
       text:newTodo
     }
-    await addTodo(todo)
+    await dispatch(onAddTodo(todo))
     setNewTodo('')
   }
 
@@ -27,7 +32,7 @@ export const TodoAdd = ({addTodo}) => {
         value={newTodo}
         />
       </div>
-      <div className='button' onClick={onAddTodo}>+</div>
+      <div className='button' onClick={addTodo}>+</div>
     </div>
   );
 }
