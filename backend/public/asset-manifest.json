@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e5500229.css",
+    "main.js": "/static/js/main.19595215.js",
+    "static/media/Kanit-Regular.ttf": "/static/media/Kanit-Regular.6e70a0feca5371044fd1.ttf",
+    "index.html": "/index.html",
+    "static/media/iconmonstr-trash-can-2.svg": "/static/media/iconmonstr-trash-can-2.156c9cc0902a7b8b9950c83b3dab6b44.svg",
+    "static/media/iconmonstr-pencil-14.svg": "/static/media/iconmonstr-pencil-14.96d54cb0e19f4c8a3729aa2fe7de9fff.svg",
+    "static/media/iconmonstr-x-mark-1.svg": "/static/media/iconmonstr-x-mark-1.7e2a977d507c0074275fb080e7b610aa.svg",
+    "static/media/iconmonstr-check-mark-1.svg": "/static/media/iconmonstr-check-mark-1.491c7c33a15eba9f6b6ba1f3d0b86a12.svg",
+    "main.e5500229.css.map": "/static/css/main.e5500229.css.map",
+    "main.19595215.js.map": "/static/js/main.19595215.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e5500229.css",
+    "static/js/main.19595215.js"
+  ]
+}
