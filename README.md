@@ -1,4 +1,4 @@
-# simple-todo-app-react
+# Todo-app-React with Redux
 
 ***Demo link - TBA***
 
@@ -7,7 +7,7 @@
 The good old todo app.
 
 Built for educational purposes using React.js with hooks.
-Did not used Reaux here, it was not necessary.
+For this one added Redux.
 
 <h2>Application Features</h2>
 
@@ -28,7 +28,7 @@ Did not used Reaux here, it was not necessary.
  <h3> How to clone? </h3>
 
  ```
- git clone https://github.com/dkatorza/simple-todo-app-react.git
+ git clone https://github.com/dkatorza/todo-app-react-hooks-redux.git
  ```
 
 <h2>Showcase</h2>
@@ -81,4 +81,3 @@ npm run build
 
 
 
-"# todo-app-react-hooks-redux" 
