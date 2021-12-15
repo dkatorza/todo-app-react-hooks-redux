@@ -20,7 +20,7 @@ Built for educational purposes using React.js with hooks.
 <h2> Technology stack </h2>
 
 - Sass
-- React.js
+- React.js (Redux,Thunk)
 - Node.js
 - Express.js
 - MongoDB (with Mongoose)
